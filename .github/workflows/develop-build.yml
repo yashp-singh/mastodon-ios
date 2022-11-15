@@ -20,13 +20,6 @@ jobs:
           NotificationEndpointRelease: ${{ secrets.NotificationEndpointRelease }}
         run: exec ./.github/scripts/setup.sh
 
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.11' 
-      - run: |
-          pip3 install codemagic-cli-tools
-      - run: |
-          codemagic-cli-tools --version || true
 
       - name: Import Code-Signing Certificates            
         uses: Apple-Actions/import-codesign-certs@v1            # https://github.com/Apple-Actions/import-codesign-certs

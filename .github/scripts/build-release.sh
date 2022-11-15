@@ -32,8 +32,7 @@ rm -rf "${API_PRIVATE_KEYS_PATH}"
 mkdir -p "${API_PRIVATE_KEYS_PATH}"
 echo -n "${ENV_API_PRIVATE_KEY_BASE64}" | base64 --decode > "${API_KEY_FILE}"
 
-BUILD_NUMBER=$(app-store-connect get-latest-testflight-build-number $ENV_APP_ID --issuer-id $ENV_ISSUER_ID --key-id $ENV_API_KEY_ID --private-key @file:$API_KEY_FILE)
-BUILD_NUMBER=$((BUILD_NUMBER+1))
+BUILD_NUMBER=`echo -n $(git rev-list --count HEAD)`
 CURRENT_PROJECT_VERSION=${BUILD_NUMBER:-0}
 
 agvtool new-version -all $CURRENT_PROJECT_VERSION
